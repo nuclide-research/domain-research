@@ -54,6 +54,51 @@ domain-research/
 Drop the `domain-research/` directory into `~/.claude/skills/`. The skill auto-registers and
 triggers on research, fact-checking, and "cite this against a real source" requests.
 
+## Usage example
+
+Ask a normal research question. The skill picks up requests to fact-check, to find a
+source, to cite a claim, or to research a topic against trusted domains.
+
+```
+> Tell me about Doc Holliday, every claim cited to an authoritative source.
+```
+
+It classifies the question (history/biography, spanning Reference, Academic, and
+Government), then works the sources. The New Georgia Encyclopedia carries the rounded
+biography. The National Park Service confirms the gunfight date and participants from a
+second category, turning a single-encyclopedia claim into a two-domain agreement. The one
+historically contested fact, his birth year, gets the deepest source: a digitized scholarly
+monograph on the Internet Archive, read at the browser tier because the lending book returns
+403 to every headless tool. The answer comes back structured:
+
+```
+Answer:
+John Henry "Doc" Holliday (August 14, 1851 to November 8, 1887) was a Georgia-born
+dentist who became one of the most recognized gamblers and gunmen of the American West...
+He participated in the gunfight near the O.K. Corral on October 26, 1881 [1][2], and died
+of tuberculosis in Glenwood Springs, Colorado, on November 8, 1887 [1].
+
+On the birth-year confusion: some older references give 1852. That is the christening
+date, not the birth. The family biography places the birth on August 14, 1851 (p. 47) and
+the belated christening on March 21, 1852 (p. 51) [3], so the 1851 date is correct.
+
+Sources Used:
+[1] Reference - "John Henry 'Doc' Holliday (1851-1887)," New Georgia Encyclopedia -
+    https://www.georgiaencyclopedia.org/articles/history-archaeology/john-henry-doc-holliday-1851-1887/
+[2] Government - "Virgil Earp," Homestead National Historical Park, U.S. National Park
+    Service - https://www.nps.gov/home/learn/historyculture/virgil-earp.htm
+[3] Reference - Karen Holliday Tanner, Doc Holliday: A Family Portrait (Univ. of Oklahoma
+    Press, 1998), pp. 47, 51 - https://archive.org/details/dochollidayfamil0000tann
+    (read via authenticated browser session; the lending book 403s to headless tools)
+
+Issues Encountered:
+- Birth-year discrepancy (1851 vs 1852) reported and resolved rather than silently picked.
+```
+
+The shape is the point: a synthesized answer, every claim keyed to a direct URL, conflicts
+surfaced instead of hidden, and the access path noted as provenance when a source needed the
+browser tier to reach.
+
 ## The contract
 
 1. No claim from a domain absent from the allowlist, however credible it looks.
