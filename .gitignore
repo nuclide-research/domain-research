@@ -1,0 +1,7 @@
+# skill-creator eval/workspace artifacts never belong in the published skill
+*-workspace/
+evals/
+feedback.json
+__pycache__/
+*.pyc
+.DS_Store
